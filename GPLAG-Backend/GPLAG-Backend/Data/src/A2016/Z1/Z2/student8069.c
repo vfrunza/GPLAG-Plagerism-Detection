@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include<math.h>
+#define eps 0.000000000000000000000000001
+
+int main() {
+	float a1,a2,b1,b2,x,y;
+	printf("Unesite a1,b1,a2,b2: ");
+	scanf("%f,%f,%f,%f"  ,&a1,&b1,&a2,&b2);
+	if((fabs(a2-a1)<eps)&&fabs(b1-b2)>eps)
+	{printf("Paralelne su");}
+	
+	else if((fabs(a2-a1)<eps)&&(fabs(b2-b1)<eps))
+	{printf("Poklapaju se");}
+	else if(fabs(a2-a1)>eps&&fabs(b2-b1)>eps){
+	x=((b2-b1)/(a1-a2));
+	y=(a1*x+b1);
+	printf("Prave se sijeku u tacci (%.1f,%.1f)",x,y);
+	}
+
+	return 0;
+}

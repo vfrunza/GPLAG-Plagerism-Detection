@@ -1,0 +1,26 @@
+#include <stdio.h>
+#define epsilon 0.00001
+
+int main() {
+	
+	float a1, a2, b1, b2;
+	float x, y;
+	
+	printf("Unesite a1,b1,a2,b2: ");
+	scanf ("%f,%f,%f,%f", &a1, &b1, &a2, &b2);
+	
+	if ( ((a1-epsilon)<a2 && (a1+epsilon)>a2) && ( ((b1+epsilon)>b2) && (b1-epsilon)<b2) ) {
+		printf ("Poklapaju se");
+	}
+	else if ( ((a1-epsilon)<a2 && (a1+epsilon)>a2) ) {
+		printf ("Paralelne su");
+	}
+	else {
+		x = (b2-b1)/(a1-a2);
+		y = a1*x + b1;
+		
+		printf ("Prave se sijeku u tacci (%.1f,%.1f)", x, y);
+	}
+	
+	return 0;
+}
