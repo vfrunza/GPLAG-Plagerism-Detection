@@ -10,13 +10,14 @@ namespace GPLAG_PD
 {
     class Lexer
     {
+        private List<string> RawStatments;
         private List<string> Statments;
         private List<Token> Tokens;
         private string Filename;
 
         private string DataLocation = @"C:/Users/Victo/Source/GPLAG-Plagerism-Detection/GPLAG-PD/GPLAG-PD/Data/src/";
 
-        private List<string> CTypes = new List<string>() { "double", "int", "float", "boolean", "char" };
+        private List<string> CTypes = new List<string>() { "double ", "int ", "float ", "boolean ", "char " };
         private List<string> CControls = new List<string>() { "if", "else", "else if", "return", "while", "for" };
         private List<string> CIncrements = new List<string>() { "++", "--" };
         private List<string> CAssignments = new List<string>() { "=", "+=", "-=", "*=", "/=", "%=>>=", "<<=", "&=", "^=", "|=" };
@@ -25,10 +26,11 @@ namespace GPLAG_PD
         public Lexer(string filename)
         {
             this.Filename = filename;
-            this.Statments = new List<string>();
+            this.RawStatments = new List<string>();
             this.Tokens = new List<Token>();
 
             this.Open();
+            this.Tokenize();
         }
 
         private void Open()
@@ -63,25 +65,33 @@ namespace GPLAG_PD
 
         private void Clean(string line)
         {
+            // this method will attempt to clean the source code and remove everything not nessesary for tokenization
+            // In general this will include:
+            // 1. REMOVE main(), comments, and directives
+            // 2. REMOVE whitespace
+            // 3. REMOVE unesseary strings from functions like printf, scanf, etc.
+            // 4. Breakup repeated declarations ex. double a,b,c,d,e
+
+            // REMOVE main(), comments, and directives
             if (line.Contains("main()") || line.Contains("//") || line.Contains("#include"))
             {
                 Console.WriteLine("Line ignored: " + line);
             }
             else
             {
-                line = line.Trim(); //trim whitespace
+                // REMOVE whitespace
+                line = line.Trim();
 
+                // REMOVE unesseary strings from functions like printf, scanf, etc.
                 string pattern = " ?\".*?\"";
                 line = Regex.Replace(line, pattern, string.Empty);
 
-
-
-                // Breakup repeated declarations ex. double a,b,c,d,e
-                if (CTypes.Any(x => line.Contains(x + " ")))
+                // BREAKUP repeated declarations ex. double a,b,c,d,e
+                if (CTypes.Any(x => line.Contains(x)))
                 {
                     foreach (string type in CTypes)
                     {
-                        Regex rx = new Regex(type + @" [\w,]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                        Regex rx = new Regex(type + @"[\w,]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                         MatchCollection matches = rx.Matches(line);
                         if (matches.Count > 0)
                         {
@@ -99,8 +109,8 @@ namespace GPLAG_PD
                                 }
                             }
 
-                            // add statments with type prefix
-                            declatrationArray.ForEach(declatration => this.Statments.Add(type + " " + declatration.Trim()));
+                            // add RawStatments with type prefix
+                            declatrationArray.ForEach(declatration => this.RawStatments.Add(type + " " + declatration.Trim()));
                             break;
                         }
                         
@@ -113,36 +123,47 @@ namespace GPLAG_PD
                     if (matches.Count > 1)
                     {
                         List<string> compoundLine = line.Split(";").ToList<string>();
-                        compoundLine.ForEach(l => this.Statments.Add(l + ";"));
+                        compoundLine.ForEach(l => this.RawStatments.Add(l + ";"));
                     }
                     else
                     {
-                        this.Statments.Add(line);
+                        this.RawStatments.Add(line);
                     }
                 }
+
+                // BREAKUP compound lines
+                
 
             }
         }
 
         public void Print()
         {
-            this.Statments.ForEach(x => Console.WriteLine(x));
+            this.RawStatments.ForEach(x => Console.WriteLine(x));
+            this.Tokens.ForEach(token => Console.WriteLine(token.ToString()));  
         }
 
         private void Tokenize()
         {
-            foreach (string line in this.Statments)
+            int tokenID = 1;
+            foreach (string line in this.RawStatments)
             {
-                if ( line.Contains("main()") || line.Contains("//") || line.Contains("#include") ){
-                    Console.WriteLine("Line ignored: " + line);
-                }
                 // check for declaration
-                else if ( CTypes.Any(x => line.Contains(x)) )
+                if ( CTypes.Any(x => line.Contains(x)) )
                 {
-
+                    string? type = CTypes.Find(x => line.Contains(x));
+                    this.Tokens.Add(new Token(tokenID++, Token.Type.Declaration, line, type));
+                }
+                // check for control
+                else if (CControls.Any(x => line.Contains(x)))
+                {
+                    this.Tokens.Add(new Token(tokenID++, Token.Type.Control, line));
                 }
                 // check for assignment
-
+                else if (line.Contains("="))
+                {
+                    this.Tokens.Add(new Token(tokenID++, Token.Type.Assignment, line));
+                }
                 // check for control
 
                 // check for call-site
@@ -153,6 +174,7 @@ namespace GPLAG_PD
 
                 // check for expression
             }
+            this.Print();
         }
     }
 }
