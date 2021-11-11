@@ -1,0 +1,65 @@
+/*4. Napravite program koji omogućuje unos prirodnog broja n, a zatim na ekranu iscrtava oblik sastavljen od znakova * koji podsjeća na slovo W, 
+odnosno sastoji se od četiri dijagonalne linije pri čemu se svaka linija sastoji od n znakova *. Ako korisnik unese cijeli broj koji nije prirodan 
+ili broj veći od 50 program treba ispisati poruku "Pogresan unos" i tražiti da korisnik ponovo unese broj sve dok se ne unese ispravan broj.*/
+#include <stdio.h>
+
+int main() {
+	int i,j,n=0;
+
+	//Unosimo broj n ako je tacan uslov da je n<=0 V n>50, a ako nije program ispisuje "Pogresan unos" i ponavlja unos	
+
+	do {
+		printf("Unesite broj n: ");
+		scanf("%d", &n);
+		
+		if ((n<=0) || (n>50) ){
+		printf("Pogresan unos\n");
+	}
+		
+	}
+	while ((n<=0) || (n>50));
+		
+		
+		// Postavljamo uslov ako je n = 1, da se ispisuju 3 zvjezdice
+	if (n == 1) {
+		printf("**");
+	}
+		
+		// Kreiranje W
+		
+		for (i=0; i<n ; i++) {
+			for (j=0; j<4*n-3; j++) {
+			if ((i == j) || ( j == 2*n-2-i) || (j == 2*n-2+i) || (j == 4*n-4-i)) { 
+				printf ("*");
+			   } else 
+			   		printf (" "); 
+			   
+			}		
+				
+			printf("\n");
+		}
+	
+	
+	
+/*Primjeri ulaza i izlaza:
+	Unesite broj n: 0
+	Pogresan unos
+	Unesite broj n: 3
+	*   *   *
+	 * * * *
+	  *   *
+
+
+	Unesite broj n: 1
+	***
+
+
+	Unesite broj n: 5
+	*       *       *
+	 *     * *     *
+	  *   *   *   *
+	   * *     * *
+	    *       *       */
+	return 0;
+}
+
