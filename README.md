@@ -15,7 +15,7 @@ Each row contains an instance of plagerism, and each student id listed participa
 
 The goal of this project will be to use the GPLAG algorithm to come to the same or similar conclusion of plagerism as the `ground-truth-static-anon.txt` file.
 
-## Code Cleaning
+## Preprocessing
 The source code had to be cleaned prior to being tokenized. The following code cleaning steps have been made:
 
 - Remove main(), comments, and directives
@@ -25,4 +25,28 @@ The source code had to be cleaned prior to being tokenized. The following code c
 - Breakup repeated declarations ex. double a,b,c,d,e
     - ex. `int a, b, c; -> int a; int bl; int c;`
 
-scanf(, &c); if(c<0 || c>10) { printf (); return 0; }
+## Tokization
+The program will the tokenize the source code, creating the following list:
+
+```
+23    | Declaration  | double  BO;                                        | BO
+24    | Control      | if (TP1 < 0 || TP1 > 20)                           | TP1
+25    | BracketOpen  | {                                                  |
+26    | Control      | return(0);                                         |
+27    | BracketClose | }                                                  |
+...
+84    | Assignment   | TBB = TP1 + TP2 + TZ + TP + TZI;                   | TBB TP1 TP2 TZ TP TZI
+85    | Assignment   | MBB = MP1 + MP2 + MP + MZ + MZI;                   | MBB MP1 MP2 MP MZ MZI
+```
+
+This list contains token idexes, the type of statment, the statment itself, and the variables involved in the statment. This data is then used to create the program dependency graph.
+
+## References
+Vedran Ljubovic, May 8, 2020, "Programming Homework Dataset for Plagiarism Detection", IEEE Dataport, doi: [https://dx.doi.org/10.21227/71fw-ss32](https://dx.doi.org/10.21227/71fw-ss32).
+
+## External Tools
+
+### Uncrustify
+I used [uncrustify](https://github.com/uncrustify/uncrustify), a C/C++ beautifying tool, as part of the preprocessing step. This tool standardized the source code by inserting `{ }` on single line `if/else` controls, added spacing around operators and variables, along with other small changes. 
+
+The variety of source code styles by different students made preprocessing manually very difficult. This tool let me skip some of preprocessing and instead focus on processing what is required for my program such as breaking statments into single lines, tokenizing, cleaning strings, and removing unessesary lines.
