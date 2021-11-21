@@ -18,6 +18,7 @@ namespace GPLAG_PD
         private string Filename;
 
         private List<string> CTypes = new List<string>() { "double ", "int ", "float ", "boolean ", "char " };
+        private List<string> CControls = new List<string>() { "if", "else", "else if", "while", "for" };
 
         public PreProcessor(string filename)
         {
@@ -77,8 +78,8 @@ namespace GPLAG_PD
                 line = line.Trim();
 
                 // REMOVE unesseary strings from functions like printf, scanf, etc.
-                string pattern = " ?\".*?\"";
-                line = Regex.Replace(line, pattern, string.Empty);
+                //string pattern = " ?\".*?\"";
+                //line = Regex.Replace(line, pattern, string.Empty);
 
                 RawStatments.Add(line);
                 
@@ -89,7 +90,7 @@ namespace GPLAG_PD
         {
             foreach (string line in RawStatments)
             {
-                if (line.Contains(";"))
+                if (line.Contains(";") && !line.Contains("for"))
                 {
                     int iStart = 0;
                     int iEnd = 1;
@@ -118,7 +119,7 @@ namespace GPLAG_PD
         {
             foreach (string line in L1Statments)
             {
-                if (CTypes.Any(x => line.Contains(x)))
+                if (CTypes.Any(x => line.Contains(x)) && !CControls.Any(x => line.Contains(x)))
                 {
                     foreach (string type in CTypes)
                     {

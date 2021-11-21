@@ -45,13 +45,31 @@ namespace GPLAG_PD
         {
             // remove touching () and ;
             string str = Statment.Replace(";", " ");
+            str = str.Replace(",", " ");
+            str = str.Replace("&", " ");
             str = str.Replace(")", " ");
             str = str.Replace("(", " ");
 
             // remove numbers
-            string pattern = @" \d+ ";
+            string pattern = @" *\d+ *";
             str = Regex.Replace(str, pattern, " ");
-            
+
+            // remove text
+            pattern = " ?\".*?\"";
+            str = Regex.Replace(str, pattern, string.Empty);
+
+            // remove increment
+            pattern = @"\+{2}";
+            str = Regex.Replace(str, pattern, string.Empty);
+            pattern = @"\-{2}";
+            str = Regex.Replace(str, pattern, string.Empty);
+
+            //remove common callsites
+            if (str.Contains("printf") || str.Contains("scanf"))
+            {
+                str = str.Replace("printf", " ");
+                str = str.Replace("scanf", " ");
+            }
 
             // save to list
             List<string> stm = str.Split(" ").ToList();
@@ -63,7 +81,7 @@ namespace GPLAG_PD
         }
 
         public override string ToString() {
-            string str = String.Format("{0,-5} | {1,-12} | {2,-50} | {3,-30}", ID.ToString(), TokenType.ToString(), Statment.ToString(), string.Join(" ", Variables.ToArray()));
+            string str = String.Format("{0,-5} | {1,-12} | {2,-120} | {3,-30}", ID.ToString(), TokenType.ToString(), Statment.ToString(), string.Join(" ", Variables.ToArray()));
             return str;
         }
     }

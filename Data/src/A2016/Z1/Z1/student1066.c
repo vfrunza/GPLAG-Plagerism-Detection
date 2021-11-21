@@ -2,6 +2,10 @@
 
 int main()
 {
+    for (int i = 0; i < 50; i++)
+    {
+        printf("hello");
+    }
    double MP1, MP2, MP, MZ, MZI, BP1, BP2, BP, BZ, BZI, TP1, TP2, TP, TZ, TZI, MBB, TBB, BBB, MO, TO, BO;
 
    printf("Unesite bodove za Tarika:\n");

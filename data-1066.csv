@@ -1,0 +1,6 @@
+source,target,value
+10|Control|   n != 0 ,12|Assignment|remainder = n % 10;,1.0
+10|Control|   n != 0 ,13|Assignment|reversed = reversed * 10 + remainder;,1.0
+10|Control|   n != 0 ,14|Assignment|n /= 10;,1.0
+16|Control|if (original == reversed),18|Expression|printf("%d is a palindrome.", original);,1.0
+20|Control|else,22|Expression|printf("%d is not a palindrome.", original);,1.0
