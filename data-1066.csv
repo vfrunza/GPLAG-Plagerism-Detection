@@ -1,6 +1,62 @@
 source,target,value
-10|Control|   n != 0 ,12|Assignment|remainder = n % 10;,1.0
-10|Control|   n != 0 ,13|Assignment|reversed = reversed * 10 + remainder;,1.0
-10|Control|   n != 0 ,14|Assignment|n /= 10;,1.0
-16|Control|if (original == reversed),18|Expression|printf("%d is a palindrome.", original);,1.0
-20|Control|else,22|Expression|printf("%d is not a palindrome.", original);,1.0
+5|Control|i < 50,6|Increment|i++,1.0
+5|Control|i < 50,8|Expression|printf("hello");,1.0
+6|Increment|i++,6|Increment|i++,1.0
+34|Control|if (TP1 < 0 || TP1 > 20),36|Expression|printf("Neispravan broj bodova");,1.0
+34|Control|if (TP1 < 0 || TP1 > 20),37|Return|return(0);,1.0
+41|Control|if (TP2 < 0 || TP2 > 20),43|Expression|printf("Neispravan broj bodova");,1.0
+41|Control|if (TP2 < 0 || TP2 > 20),44|Return|return(0);,1.0
+48|Control|if (TP < 0 || TP > 10),50|Expression|printf("Neispravan broj bodova");,1.0
+48|Control|if (TP < 0 || TP > 10),51|Return|return(0);,1.0
+55|Control|if (TZ < 0 || TZ > 10),57|Expression|printf("Neispravan broj bodova");,1.0
+55|Control|if (TZ < 0 || TZ > 10),58|Return|return(0);,1.0
+62|Control|if (TZI < 0 || TZI > 40),64|Expression|printf("Neispravan broj bodova");,1.0
+62|Control|if (TZI < 0 || TZI > 40),65|Return|return(0);,1.0
+70|Control|if (BP1 < 0 || BP1 > 20),72|Expression|printf("Neispravan broj bodova");,1.0
+70|Control|if (BP1 < 0 || BP1 > 20),73|Return|return(0);,1.0
+77|Control|if (BP2 < 0 || BP2 > 20),79|Expression|printf("Neispravan broj bodova");,1.0
+77|Control|if (BP2 < 0 || BP2 > 20),80|Return|return(0);,1.0
+84|Control|if (BP < 0 || BP > 10),86|Expression|printf("Neispravan broj bodova");,1.0
+84|Control|if (BP < 0 || BP > 10),87|Return|return(0);,1.0
+91|Control|if (BZ < 0 || BZ > 10),93|Expression|printf("Neispravan broj bodova");,1.0
+91|Control|if (BZ < 0 || BZ > 10),94|Return|return(0);,1.0
+98|Control|if (BZI < 0 || BZI > 40),100|Expression|printf("Neispravan broj bodova");,1.0
+98|Control|if (BZI < 0 || BZI > 40),101|Return|return(0);,1.0
+106|Control|if (MP1 < 0 || MP1 > 20),108|Expression|printf("Neispravan broj bodova");,1.0
+106|Control|if (MP1 < 0 || MP1 > 20),109|Return|return(0);,1.0
+113|Control|if (MP2 < 0 || MP2 > 20),115|Expression|printf("Neispravan broj bodova");,1.0
+113|Control|if (MP2 < 0 || MP2 > 20),116|Return|return(0);,1.0
+120|Control|if (MP < 0 || MP > 10),122|Expression|printf("Neispravan broj bodova");,1.0
+120|Control|if (MP < 0 || MP > 10),123|Return|return(0);,1.0
+127|Control|if (MZ < 0 || MZ > 10),129|Expression|printf("Neispravan broj bodova");,1.0
+127|Control|if (MZ < 0 || MZ > 10),130|Return|return(0);,1.0
+134|Control|if (MZI < 0 || MZI > 40),136|Expression|printf("Neispravan broj bodova");,1.0
+134|Control|if (MZI < 0 || MZI > 40),137|Return|return(0);,1.0
+142|Control|if (TBB < 55),144|Assignment|TO = 5;,1.0
+146|Control|else if (TBB >= 55 && TBB < 65),148|Assignment|TO = 6;,1.0
+150|Control|else if (TBB >= 65 && TBB < 75),152|Assignment|TO = 7;,1.0
+154|Control|else if (TBB >= 75 && TBB < 85),156|Assignment|TO = 8;,1.0
+158|Control|else if (TBB >= 85 && TBB < 92),160|Assignment|TO = 9;,1.0
+162|Control|else,164|Assignment|TO = 10;,1.0
+166|Control|if (MBB < 55),168|Assignment|MO = 5;,1.0
+170|Control|else if (MBB >= 55 && MBB < 65),172|Assignment|MO = 6;,1.0
+174|Control|else if (MBB >= 65 && MBB < 75),176|Assignment|MO = 7;,1.0
+178|Control|else if (MBB >= 75 && MBB < 85),180|Assignment|MO = 8;,1.0
+182|Control|else if (MBB >= 85 && MBB < 92),184|Assignment|MO = 9;,1.0
+186|Control|else,188|Assignment|MO = 10;,1.0
+190|Control|if (BBB < 55),192|Assignment|BO = 5;,1.0
+194|Control|else if (BBB >= 55 && BBB < 65),196|Assignment|BO = 6;,1.0
+198|Control|else if (BBB >= 65 && BBB < 75),200|Assignment|BO = 7;,1.0
+202|Control|else if (BBB >= 75 && BBB < 85),204|Assignment|BO = 8;,1.0
+206|Control|else if (BBB >= 85 && BBB < 92),208|Assignment|BO = 9;,1.0
+210|Control|else,212|Assignment|BO = 10;,1.0
+214|Control|if (MO < 6 && BO < 6 && TO < 6),216|Expression|printf("Nijedan student nije polozio.\n");,1.0
+218|Control|else if (MO >= 6 && BO >= 6 && TO >= 6),220|Expression|printf("Sva tri studenta su polozila.\n");,1.0
+222|Control|else if ((MO < 6 && BO < 6 && TO >= 6) || (MO < 6 && BO >= 6 && TO < 6) || (MO >= 6 && BO < 6 && TO < 6)),224|Expression|printf("Jedan student je polozio.\n");,1.0
+226|Control|else,228|Expression|printf("Dva studenta su polozila.\n");,1.0
+230|Control|if (MO >= 6 && BO >= 6 && TO >= 6),232|Control|if (MO == BO && BO == TO),1.0
+230|Control|if (MO >= 6 && BO >= 6 && TO >= 6),236|Control|else if (MO != BO && BO != TO && MO != TO),1.0
+230|Control|if (MO >= 6 && BO >= 6 && TO >= 6),240|Control|else,1.0
+232|Control|if (MO == BO && BO == TO),234|Expression|printf("Sva tri studenta imaju istu ocjenu.");,1.0
+236|Control|else if (MO != BO && BO != TO && MO != TO),238|Expression|printf("Svaki student ima razlicitu ocjenu.");,1.0
+240|Control|else,242|Expression|printf("Dva od tri studenta imaju istu ocjenu.");,1.0

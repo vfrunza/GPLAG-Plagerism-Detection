@@ -10,12 +10,14 @@ namespace GPLAG_PD
     class ProgramDependencyGraph
     {
         private List<Token> Source;
-        private List<Node> ControlGraph;
+        public List<Node> ControlGraph;
+        public List<Node> DataGraph;
 
         public ProgramDependencyGraph(List<Token> source)
         {
             Source = source;
             ControlGraph = new List<Node>();
+            DataGraph = new List<Node>();
         }
 
         public void BuildControlGraph()
@@ -65,9 +67,54 @@ namespace GPLAG_PD
             }
         }
 
+        public void BuildDataGraph()
+        {
+            foreach (Token tk in Source)
+            {
+                if (tk.ID == 1 || tk.ID == 2 || tk.ID == Source.Count())
+                {
+                    //ignore main
+                }
+                else
+                {
+                    // if node is a declaration, add it to parents
+                    if (tk.TokenType == Token.Type.Declaration)
+                    {
+                        DataGraph.Add(new Node(tk, (Node.Type)tk.TokenType));
+                    }
+                    else
+                    {
+                        foreach (Node nd in DataGraph)
+                        {
+                            foreach (string vari in tk.Variables)
+                            {
+                                if (nd.tk.Variables.Contains(vari))
+                                {
+                                    nd.Add(new Node(tk, (Node.Type)tk.TokenType));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public void PrintControlGraph()
         {
             foreach (Node nd in ControlGraph)
+            {
+                Console.WriteLine(nd.ToString());
+                if (nd.GetChildrenCount() != 0)
+                {
+                    Console.WriteLine(" | Children: ");
+                    Console.WriteLine(nd.ToStringChildren());
+                }
+            }
+        }
+
+        public void PrintDataGraph()
+        {
+            foreach (Node nd in DataGraph)
             {
                 Console.WriteLine(nd.ToString());
                 if (nd.GetChildrenCount() != 0)

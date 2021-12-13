@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using vflibcs;
 
 namespace GPLAG_PD
 {
-    class Node
+    class Node: IComparable<Node>
     {
         public enum Type
         {
@@ -22,15 +23,17 @@ namespace GPLAG_PD
             Switch
         }
 
-        private int ID;
+        public int ID;
         private string Statment;
+        public Token tk;
         public Type NodeType { get;}
-        private List<Node> Children;
+        public List<Node> Children;
 
         public Node(Token tk, Type tp)
         {
             ID = tk.ID;
             Statment = tk.Statment;
+            this.tk = tk;
             NodeType = tp;
             Children = new List<Node>();
         }
@@ -77,6 +80,12 @@ namespace GPLAG_PD
             return children;
         }
 
-
+        public int CompareTo(Node? other)
+        {
+            if (this.NodeType == other.NodeType)
+                return 0;
+            else
+                return 1;
+        }
     }
 }

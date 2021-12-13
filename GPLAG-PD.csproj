@@ -15,4 +15,10 @@
     <Folder Include="Output\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="VfLib">
+      <HintPath>..\..\OneDrive\Desktop\GraphIsomorphism-master\VfLib\bin\Debug\VfLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
