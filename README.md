@@ -11,6 +11,10 @@ To run this project you need Visual Studio 2022 and.NET 6 installed.
 7. In `Program.cs` I've left a sample of test cases you can run. Simply comment out/in the files you wish to run.
 8. Press F5 to run the project.
 
+Data files are found in data. All test source code is in the folder `Data/src/A2016/Z1/Z1`.
+
+To view the D3.js visualization, you must copy the exported .csv file from visual studio's bin folder and place it in the repository's root and open index.html. Note: most browsers block javascript from opening local folders, you'll have to desable this protection in your broswer for this to work.
+
 ## Project
 
 This project was for COSC 329 Learning Analytics. In this project I used [this](https://ieee-dataport.org/open-access/programming-homework-dataset-plagiarism-detection) dataset compiled by Vedran Ljubovic for sample assignments submitted by students. Along with code samples, this dataset also contains a file called `ground-truth-static-anon.txt` which contains a list of Plagiarism cases based on code similarity. An example snippet is shown below:
